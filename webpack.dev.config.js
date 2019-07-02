@@ -1,15 +1,14 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 const base = require('./webpack.base.config');
 
 module.exports = merge(base, {
   mode: 'development',
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'build'),
     hot: true,
-    inline: true,
-    compress: true,
     port: 9000,
     historyApiFallback: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -21,4 +20,5 @@ module.exports = merge(base, {
       },
     ],
   },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });
