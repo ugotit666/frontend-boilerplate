@@ -6,10 +6,6 @@ module.exports = {
   entry: {
     index: path.resolve(__dirname, './src/index.jsx'),
   },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, './build'),
-  },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
@@ -20,7 +16,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
@@ -80,9 +76,4 @@ module.exports = {
     }),
     new CopyPlugin([]),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
 };

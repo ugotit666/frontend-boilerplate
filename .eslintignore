@@ -1,4 +1,4 @@
-!.eslintrc.js
 !.babelrc.js
+!.eslintrc.js
 !.prettierrc.js
-build/**
+!.huskyrc.js
