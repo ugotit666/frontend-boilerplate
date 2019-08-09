@@ -2,6 +2,13 @@ const HtmlPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
+require('dotenv').config({
+  path: process.env.NODE_ENV === 'development' ? './.dev.env' : './.prod.env',
+  debug: process.env.DEBUG,
+});
+
+const { APP_NAME = 'FRONTEND BOILERPLATE' } = process.env;
+
 module.exports = {
   entry: {
     index: path.resolve(__dirname, './src/index.jsx'),
@@ -70,9 +77,12 @@ module.exports = {
   },
   plugins: [
     new HtmlPlugin({
-      title: 'FRONTEND BOILERPLATE',
       filename: 'index.html',
-      template: path.resolve(__dirname, './src/index.html'),
+      template: path.resolve(__dirname, './src/index.ejs'),
+      title: APP_NAME,
+      meta: {
+        viewport: 'width=device-width, initial-scale=1',
+      },
     }),
     new CopyPlugin([]),
   ],
